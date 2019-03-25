@@ -98,8 +98,8 @@ def parse_precond_tokens(tokens, start, params, preconds, Domain):
         return False  
     i = start
     flag = True
-    args = []
     while i < len(tokens):
+        args = []
         pred_name = tokens[i].strip('(').strip(')')
         flag = True
         if pred_name == 'not':
@@ -264,9 +264,7 @@ def parse_Domain(Domain_file):
     headline = skip_empty_lines(Domain_file)
     D.name = headline[2][:-1]
     parse_predicates(Domain_file, D)
-    print("predicates successful\n")
     parse_tasks(Domain_file, D)
-    print("tasks successful\n")
     for line in Domain_file:
         tokens = line.strip().split()
         if len(tokens) == 0:
