@@ -106,15 +106,16 @@ def parse_precond_tokens(tokens, start, params, preconds, Domain):
             flag = False
             i += 1
             pred_name = tokens[i].strip('(').strip(')')
-        pred = Domain.preds[pred_name]
         j = i + 1
-        while j < len(tokens) and tokens[j][0] == '?':
-            pred_param = tokens[j][1:].strip(')')
-            pnum = params[pred_param]
-            args.append(pnum)
-            j += 1
+        if pred_name != '':
+            pred = Domain.preds[pred_name]        
+            while j < len(tokens) and tokens[j][0] == '?':
+                pred_param = tokens[j][1:].strip(')')
+                pnum = params[pred_param]
+                args.append(pnum)
+                j += 1
+            preconds.append([pred, flag, args])
         i = j
-        preconds.append([pred, flag, args])
     if flag:
         return (not tokens[-1][-2:] == '))')
     else:
@@ -205,14 +206,15 @@ def parse_subtask_tokens(tokens, start, param_dict, subtasks, Domain):
         return False     
     i = start
     while i < len(tokens):
-        subtask_name = tokens[i].strip('(').strip(')')
-        subtask_params = []        
         j = i + 1
-        while j < len(tokens) and tokens[j][0] == '?':
-            subtask_params.append(param_dict[tokens[j][1:].strip(')')])
-            j += 1
+        subtask_name = tokens[i].strip('(').strip(')')
+        if subtask_name != '':
+            subtask_params = []        
+            while j < len(tokens) and tokens[j][0] == '?':
+                subtask_params.append(param_dict[tokens[j][1:].strip(')')])
+                j += 1
+            subtasks.append([Domain.tasks[subtask_name], subtask_params])
         i = j
-        subtasks.append([Domain.tasks[subtask_name], subtask_params])
     
 
 def parse_method(Domain_file, Domain, init_tokens):
