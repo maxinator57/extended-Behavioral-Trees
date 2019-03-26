@@ -3,7 +3,9 @@ from htn_classes import *
 world_state = State()
 call_stack = []
 
-def find_solution(tasks, init_state):
+def find_htn_solution(tasks, init_state):
+    global world_state
+    global call_stack
     world_state = init_state
     for task_node in tasks:
         call_stack.append([task_node, 0])
@@ -14,14 +16,14 @@ def find_solution(tasks, init_state):
                 call_stack.append([task_node, 0])
                 success = go()
         if not success:
-            return False
+            return call_stack
     return call_stack
         
         
 def go():
     global world_state
     global call_stack
-        
+    
     if len(call_stack) == 0:
         return False
     tnode = call_stack[-1][0]
@@ -39,7 +41,7 @@ def go():
     m_num = call_stack[-1][1]
     ret = False
     for i in range(m_num, len(tnode.methods)):
-        world_state = call_stack[-1][2].copy()
+        world_state = call_stack[-1][2].copy()        
         mnode = tnode.methods[i]
         preconds_ok = True
         for precond in mnode.method.preconds:

@@ -49,13 +49,14 @@ def parse_state_pred_tokens(tokens, start, state):
     return (not tokens[-1][-2:] == '))')
 
 
-def parse_init_preds(Problem_file, Problem):
+def parse_init_preds(Problem_file, Problem, Domain):
     line = skip_empty_lines(Problem_file)
     tokens = line.split()
     if tokens[0] != '(:init':
         print('Bad format: init predicates\n')
         return
     start = 1
+    Problem.init_state.preds = Domain.preds.copy()
     while parse_state_pred_tokens(tokens, start, Problem.init_state):
         tokens = skip_empty_lines(Problem_file).split()
         start = 0
@@ -97,12 +98,12 @@ def parse_goals(Problem_file, Problem):
         start = 0    
 
 
-def parse_Problem(Problem_file):
+def parse_Problem(Problem_file, Domain):
     P = Problem()
     headline = skip_empty_lines(Problem_file)
     P.name = headline[2][:-1]
     P.domain_name = skip_empty_lines(Problem_file)[1][:-1]
     parse_objects(Problem_file, P)
-    parse_init_preds(Problem_file, P)
+    parse_init_preds(Problem_file, P, Domain)
     parse_goals(Problem_file, P)
     return P
