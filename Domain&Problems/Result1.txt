@@ -1,0 +1,5 @@
+Plan created:
+
+move_simple_op ['B', 'A']
+
+of length 1

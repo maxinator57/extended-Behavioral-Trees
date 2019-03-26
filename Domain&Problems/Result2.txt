@@ -1,0 +1,11 @@
+Plan created:
+
+move_simple_op ['B', 'A']
+load_op ['cube1', 'A']
+move_simple_op ['A', 'B']
+drop_op ['cube1', 'B']
+load_op ['cube2', 'B']
+move_simple_op ['B', 'C']
+drop_op ['cube2', 'C']
+
+of length 7

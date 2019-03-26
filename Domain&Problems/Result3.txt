@@ -1,0 +1,21 @@
+Plan created:
+
+move_simple_op ['B', 'A']
+load_op ['cube1', 'A']
+move_simple_op ['A', 'B']
+drop_op ['cube1', 'B']
+load_op ['cube2', 'B']
+move_simple_op ['B', 'C']
+drop_op ['cube2', 'C']
+move_simple_op ['C', 'B']
+load_op ['cube3', 'B']
+move_simple_op ['B', 'A']
+drop_op ['cube3', 'A']
+move_simple_op ['A', 'B']
+move_simple_op ['B', 'C']
+load_op ['cube4', 'C']
+move_simple_op ['C', 'B']
+move_simple_op ['B', 'A']
+drop_op ['cube4', 'A']
+
+of length 17
