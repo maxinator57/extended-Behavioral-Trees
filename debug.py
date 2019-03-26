@@ -5,7 +5,7 @@ from htn_algorithm import *
 from eBT_algorithm import *
 
 Domain_file = open('domain_cubes.pddl', 'r')
-Problem_file = open('problem2.pddl', 'r')
+Problem_file = open('problem1.pddl', 'r')
 D = parse_Domain(Domain_file)
 P = parse_Problem(Problem_file, D)
 res = ground(D, P)
@@ -23,5 +23,5 @@ else:
             print(op_node.method.name, op_node.args)
             length += 1
     print('\nof length', length, end='\n')
-    for block in eBT_go(opline):
-        print(block)
+    #for block in eBT_go(opline):
+     #   print(block)
